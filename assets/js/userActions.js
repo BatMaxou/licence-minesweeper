@@ -27,5 +27,8 @@ export function onBtnDifficultyClick(e) {
         }
     }
 
-    return level
+    return {
+        difficulty: level,
+        dimension: gridCount
+    }
 }
