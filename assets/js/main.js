@@ -1,8 +1,22 @@
 import { onBtnDifficultyClick } from './userActions.js';
 import Minesweeper from './minesweeper.js';
 
-let level = null
+let infos = {
+    difficulty: 0,
+    dimension: 0,
+}
 
-document.querySelectorAll("button").forEach(item => (item.addEventListener('click', onBtnDifficultyClick)))
+document.querySelectorAll(".level__btn").forEach(item => (item.addEventListener('click', (e) => {
+    // afficher btn start
+    infos = onBtnDifficultyClick(e)
 
-new Minesweeper(10, 10, 10);
+})))
+
+document.querySelector(".level__btn-start").addEventListener('click', () => {
+    const { difficulty, dimension } = infos
+    if (difficulty !== 0 || dimension !== 0) {
+        document.querySelector(".level").style.display = "none"
+        new Minesweeper(infos.dimension, infos.dimension, infos.difficulty)
+    }
+})
+
