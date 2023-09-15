@@ -16,6 +16,7 @@ export function onBtnDifficultyClick(e) {
         default:
             throw new Error('The difficulty level is incorrect.')
     }
+
     for (let i = 0; i < gridCount; i++) {
         let row = divGrid.insertRow(i)
         for (let j = 0; j < gridCount; j++) {
@@ -25,4 +26,6 @@ export function onBtnDifficultyClick(e) {
             cell.setAttributeNode(pos)
         }
     }
+
+    return level
 }

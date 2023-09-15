@@ -1,9 +1,9 @@
-La classe fait le lien entre l'utilisateur et l'interface back/front
+La classe fait le lien entre l'utilisateur et l'interface front
 
 BACK
 
-- class game:
-    - initGame(difficulty)
+- class Minesweeper:
+    - init()
     - start(l,L,nbBomb)
     - end(bool = false) => gagné/perdu
     - tryBox(x,y)
@@ -12,7 +12,6 @@ BACK
     - removeFlag(x,y)
 
 - bibliothèque de fonctions:
-    - initGrid(l, L, difficulty) => voir ou mettre la traduction entre difficulty/nb Bomb
     - placeBomb(nb) => nb varie selon la difficulté choisie
     - fillGrid()
     - try(x,y) => return bool selon si bomb ou pas (if nbBox === 0 => revealBox de celles autour)
