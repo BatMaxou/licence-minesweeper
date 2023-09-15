@@ -27,7 +27,7 @@ FRONT
     - displayFlag(x,y)
     - reveal(x,y) => fin de la logistique du click (relance les clics environant ?? )
     - onCellClick => logistique du click
-    - onBtnDifficulty() => change l'affichage de la grille
+    - onBtnDifficultyClick() => change l'affichage de la grille
     - onBtnStartClick() => disparition des btn difficulty et affichage de celle selectionner et du btn leave
     - onBtnLeaveClick()
     - displayWin()
