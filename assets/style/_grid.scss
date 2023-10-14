@@ -4,24 +4,24 @@
     td {
         width: 24px;
         height: 17px;
-        border: 1px solid #d1cfcf;
+        border: 1px solid $lightGrey;
         padding: 7px 4px 4px 4px;
-        background-color: #f5f5f5;
+        background-color: $lightGrey;
         font-size: 16px;
         text-align: center;
-        box-shadow: inset 5px 5px 10px #FFF, inset -3px -3px 5px #777;
+        box-shadow: inset 5px 5px 10px $white, inset -3px -3px 5px $grey;
         cursor: pointer;
         transition-property: background-color, box-shadow;
         transition-duration: .5s;
         transition-timing-function: ease-out;
 
         &hover {
-            background-color: #d1cfcf;
+            background-color: $lightGrey;
         }
     }
 }
 
-@media screen and (max-width:900px) {
+@media (max-width:900px) {
     .grid td {
         width: 15px;
         height: 14px;
