@@ -13,7 +13,6 @@ export function reveal(minesweeper, { x, y }, isNotBomb) {
 
         if (value === '0') {
             minesweeper.getNeighbors(x, y).forEach(neighborsCoords => {
-                console.log(neighborsCoords);
                 reveal(minesweeper, neighborsCoords, isNotBomb)
             })
         }

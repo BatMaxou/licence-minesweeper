@@ -64,7 +64,6 @@ export default class Minesweeper {
 
     #exist({ x, y }, callback) {
         if (this.grid[y][x]) {
-            console.log(this.grid[y][x])
             callback({ x, y })
         }
     }
