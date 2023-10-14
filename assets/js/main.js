@@ -9,7 +9,6 @@ let infos = {
 document.querySelectorAll(".level__btn").forEach(item => (item.addEventListener('click', (e) => {
     // afficher btn start
     infos = onBtnDifficultyClick(e)
-
 })))
 
 document.querySelector(".level__btn-start").addEventListener('click', () => {
@@ -19,4 +18,3 @@ document.querySelector(".level__btn-start").addEventListener('click', () => {
         new Minesweeper(infos.dimension, infos.dimension, infos.difficulty)
     }
 })
-
