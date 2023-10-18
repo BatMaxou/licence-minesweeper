@@ -1,10 +1,12 @@
-import { onBtnDifficultyClick } from './userActions.js';
-import Minesweeper from './minesweeper.js';
+import { onBtnDifficultyClick, onBtnStartClick, onCellClick } from './userActions.js'
+import { reveal } from './frontActions.js'
 
 let infos = {
     difficulty: 0,
     dimension: 0,
 }
+
+let minesweeper = null
 
 document.querySelectorAll(".level__btn").forEach(item => (item.addEventListener('click', (e) => {
     // afficher btn start
@@ -12,9 +14,12 @@ document.querySelectorAll(".level__btn").forEach(item => (item.addEventListener(
 })))
 
 document.querySelector(".level__btn-start").addEventListener('click', () => {
-    const { difficulty, dimension } = infos
-    if (difficulty !== 0 || dimension !== 0) {
-        document.querySelector(".level").style.display = "none"
-        new Minesweeper(infos.dimension, infos.dimension, infos.difficulty)
-    }
+    minesweeper = onBtnStartClick(infos)
+
+    const cells = document.querySelectorAll('td')
+    cells.forEach(cell => cell.addEventListener('click', (e) => {
+        const coords = onCellClick(e)
+        const isNotBomb = minesweeper.try(coords)
+        reveal(minesweeper, coords, isNotBomb)
+    }))
 })

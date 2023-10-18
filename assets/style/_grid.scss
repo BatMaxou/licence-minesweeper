@@ -3,20 +3,28 @@
 
     td {
         width: 24px;
-        height: 17px;
+        height: 24px;
         border: 1px solid $lightGrey;
-        padding: 7px 4px 4px 4px;
-        background-color: $lightGrey;
+        padding: 5px;
         font-size: 16px;
         text-align: center;
-        box-shadow: inset 5px 5px 10px $white, inset -3px -3px 5px $grey;
         cursor: pointer;
+        background-color: $lightGrey;
+        // box-shadow: inset 5px 5px 10px $white, inset -3px -3px 5px $grey;
         transition-property: background-color, box-shadow;
         transition-duration: .5s;
         transition-timing-function: ease-out;
 
-        &hover {
-            background-color: $lightGrey;
+        &:hover {
+            background-color: $white;
+        }
+
+        &.revealed {
+            background-color: $green;
+        }
+
+        &.bomb {
+            background-color: $red;
         }
     }
 }
@@ -24,8 +32,8 @@
 @media (max-width:900px) {
     .grid td {
         width: 15px;
-        height: 14px;
-        padding: 1px;
+        height: 15px;
+        padding: 2px;
         font-size: 12px;
     }
 }

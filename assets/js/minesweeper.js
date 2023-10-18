@@ -21,8 +21,8 @@ export default class Minesweeper {
             let x = Math.floor(Math.random() * this.width);
             let y = Math.floor(Math.random() * this.height);
 
-            if (this.grid[x][y] === 0) {
-                this.grid[x][y] = 'B';
+            if (this.grid[y][x] === 0) {
+                this.grid[y][x] = 'B';
                 bombs--;
             }
         }
@@ -30,48 +30,42 @@ export default class Minesweeper {
 
     #countBomb(x, y) {
         let count = 0
+        this.#explore({ x, y }, (coords) => this.#isBomb(coords, () => count++))
 
-        if (this.grid[y][x - 1] && this.grid[y][x - 1] === 'B') {
-            count++
-        }
-
-        if (this.grid[y][x + 1] && this.grid[y][x + 1] === 'B') {
-            count++
-        }
-
-        if (this.grid[y + 1]) {
-            if (this.grid[y + 1][x] && this.grid[y + 1][x] === 'B') {
-                count++
-            }
-
-            if (this.grid[y + 1][x + 1] && this.grid[y + 1][x + 1] === 'B') {
-                count++
-            }
-
-            if (this.grid[y + 1][x - 1] && this.grid[y + 1][x - 1] === 'B') {
-                count++
-            }
-        }
-
-        if (this.grid[y - 1]) {
-            if (this.grid[y - 1][x] && this.grid[y - 1][x] === 'B') {
-                count++
-            }
-
-            if (this.grid[y - 1][x - 1] && this.grid[y - 1][x - 1] === 'B') {
-                count++
-            }
-
-            if (this.grid[y - 1][x + 1] && this.grid[y - 1][x + 1] === 'B') {
-                count++
-            }
-        }
-
-        return count
+        return count.toString()
     }
 
     #placeNumbers() {
         this.grid = this.grid.map((row, y) => row.map((el, x) => 'B' === el ? el : this.#countBomb(x, y)))
+    }
+
+    #explore({ x, y }, callback) {
+        callback({ x: x - 1, y })
+        callback({ x: x + 1, y })
+
+        if (this.grid[y + 1]) {
+            callback({ x, y: y + 1 })
+            callback({ x: x - 1, y: y + 1 })
+            callback({ x: x + 1, y: y + 1 })
+        }
+
+        if (this.grid[y - 1]) {
+            callback({ x, y: y - 1 })
+            callback({ x: x - 1, y: y - 1 })
+            callback({ x: x + 1, y: y - 1 })
+        }
+    }
+
+    #isBomb({ x, y }, callback) {
+        if (this.grid[y][x] && this.grid[y][x] === 'B') {
+            callback()
+        }
+    }
+
+    #exist({ x, y }, callback) {
+        if (this.grid[y][x]) {
+            callback({ x, y })
+        }
     }
 
     init() {
@@ -83,6 +77,25 @@ export default class Minesweeper {
         }
         this.#placeBombs();
         this.#placeNumbers();
+
         console.log(this.grid);
+    }
+
+    try({ x, y }) {
+        if (this.grid[y][x] === 'B') {
+            return false;
+        }
+        return true;
+    }
+
+    getValue(x, y) {
+        return this.grid[y][x]
+    }
+
+    getNeighbors(x, y) {
+        let neighbors = []
+        this.#explore({ x, y }, (neighborsCoords) => this.#exist(neighborsCoords, (neighborsCoords) => neighbors.push(neighborsCoords)))
+
+        return neighbors
     }
 }
