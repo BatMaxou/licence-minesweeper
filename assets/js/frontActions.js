@@ -5,9 +5,8 @@ export function reveal(minesweeper, { x, y }, isNotBomb) {
         return
     }
 
-    const value = minesweeper.getValue(x, y)
-
     if (isNotBomb) {
+        const value = minesweeper.getValue(x, y)
         cell.classList.add('revealed')
 
         if (value === '0') {
