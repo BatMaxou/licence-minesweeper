@@ -1,1 +1,0 @@
-export default (minesweeper) => { minesweeper = null };

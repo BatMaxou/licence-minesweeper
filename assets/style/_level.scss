@@ -12,41 +12,46 @@
 
     &__btn-container {
         display: flex;
+        flex-flow: row;
         gap: 1rem;
 
         button {
             width: 5rem;
             cursor: pointer;
             border-radius: 5px;
-            height: 2rem;
+            height: 1.9rem;
             transition-duration: .2s;
 
             &:first-child {
-                background-color: $yellow;
-                border: outset $yellowOutset;
+                background-color: #abffab;
+                border: outset #d4ffd4;
 
                 &:hover {
-                    background-color: $darkYellow;
+                    background-color: darken($color: #abffab, $amount: 6);
                 }
             }
 
             &:nth-child(2) {
-                background-color: $blue;
-                border: outset $blueOutset;
+                background-color: #abedff;
+                border: outset #d4f9ff;
 
                 &:hover {
-                    background-color: $darkBlue;
+                    background-color: darken($color: #abedff, $amount: 6);
                 }
             }
 
             &:last-child {
-                background-color: $red;
-                border: outset $redOutset;
+                background-color: #ffabb8;
+                border: outset #ffd4dd;
 
                 &:hover {
-                    background-color: $darkRed;
+                    background-color: darken($color: #ffabb8, $amount: 6);
                 }
             }
+
+
         }
+
+
     }
 }
