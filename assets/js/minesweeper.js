@@ -1,6 +1,6 @@
 export default class Minesweeper {
 
-    bombByDifficulty = {
+    nbBombByDifficulty = {
         1: 10,
         2: 30,
         3: 75,
@@ -10,12 +10,14 @@ export default class Minesweeper {
         this.width = width;
         this.height = height;
         this.level = level;
+        this.score = 0;
+        this.success = width * height - this.nbBombByDifficulty[level];
         this.grid = [];
         this.init();
     }
 
     #placeBombs() {
-        let bombs = this.bombByDifficulty[this.level];
+        let bombs = this.nbBombByDifficulty[this.level];
 
         while (bombs > 0) {
             let x = Math.floor(Math.random() * this.width);
@@ -98,4 +100,5 @@ export default class Minesweeper {
 
         return neighbors
     }
+
 }

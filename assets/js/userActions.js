@@ -1,4 +1,5 @@
 import Minesweeper from './minesweeper.js'
+import destroyer from './destroyer.js'
 
 export function onBtnDifficultyClick(e) {
     let level = parseInt(e.target.value)
@@ -35,12 +36,19 @@ export function onBtnDifficultyClick(e) {
     }
 }
 
-export function onBtnStartClick(infos) {
-    const { difficulty, dimension } = infos
+export function onBtnStartClick({ difficulty, dimension }) {
     if (difficulty !== 0 || dimension !== 0) {
         document.querySelector(".level").style.display = "none"
-        return new Minesweeper(infos.dimension, infos.dimension, infos.difficulty)
+        return new Minesweeper(dimension, dimension, difficulty)
     }
+}
+
+export function onBtnLeaveClick(minesweeper) {
+    minesweeper = null
+    const divGrid = document.querySelector(".grid")
+    document.querySelector(".level").style.display = "block"
+    divGrid.innerHTML = ""
+    return
 }
 
 export function onCellClick(e) {
