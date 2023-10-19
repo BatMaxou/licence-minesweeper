@@ -1,3 +1,5 @@
+import Minesweeper from './minesweeper.js'
+
 export function onBtnDifficultyClick(e) {
     let level = parseInt(e.target.value)
     let gridCount = 0
@@ -27,5 +29,26 @@ export function onBtnDifficultyClick(e) {
         }
     }
 
-    return level
+    return {
+        difficulty: level,
+        dimension: gridCount
+    }
+}
+
+export function onBtnStartClick(infos) {
+    const { difficulty, dimension } = infos
+    if (difficulty !== 0 || dimension !== 0) {
+        document.querySelector(".level").style.display = "none"
+        return new Minesweeper(infos.dimension, infos.dimension, infos.difficulty)
+    }
+}
+
+export function onCellClick(e) {
+    const [y, x] = e.target.dataset.pos.replaceAll(" ", "").split("-")
+
+    // au cas ou l'utilisateur change les coordonnées de la cellule
+    return {
+        x: parseInt(x, 10),
+        y: parseInt(y, 10)
+    }
 }
