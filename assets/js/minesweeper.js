@@ -101,4 +101,8 @@ export default class Minesweeper {
         return neighbors
     }
 
+    isFinished() {
+        console.log(this.score, this.success)
+        return this.score === this.success ? true : false
+    }
 }

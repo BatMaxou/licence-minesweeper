@@ -46,13 +46,18 @@
     - OK - try(x,y) => return bool  //if cell x,y is bomb return false otherwise true
     - OK - getValue(x, y) => value  //get the value of x,y cell
     - OK - getNeighbors(x,y) => coords  // return coordonnates of adjacents cells
-    - isFinished(force=false) => {bool(finish), bool(success)}  //if score === scorefinal ? win : nothing | if bomb => fail
+    - OK - isFinished() => {bool(success)}  //if score === scorefinal ? win true : false
 
 ## Modules
 
 ### frontActions:
 
-  - OK - export reveal({minesweeper}, {x,y}, inNotBomb = bool) =>  //get cell x,y, verify if already reveal or not, get value and display it in cell if not bomb and value 0 => get all the neighboring cells values. 
+  - OK - export reveal({minesweeper}, {x,y}, inNotBomb = bool) =>  
+      get cell x,y, 
+      verify if already reveal or not, 
+      get value and display it in cell if not bomb and value 0 => get all the neighboring cells values,
+      trigger displayWin and displayFail actions 
+
 ```js
 function reveal(minesweeper, { x, y }, isNotBomb) {
    //get the cell
@@ -70,11 +75,12 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
 }
 
 ```
-  - export displayBombNumber()
-  - export moveCounter() => add 1 to each click of the user
-  - export end({bool})   //destroy minesweeper object and handle display win|fail
-  - displayWin()    //success animation
-  - displayFail()   //loose animation    
+  - OK - export displayBombNumber()
+  - OK - export displayErrorMessage()
+  - OK - export moveCounter() => add 1 to each click of the user and display it
+  - OK - export end()   //clear grid, display level buttons back
+  - PENDING - displayWin()    //success animation and end()
+  - PENDING - displayFail()   //loose animation and end()
   - export placeFlag(x,y)
   - export removeFlag(x,y)
   
@@ -83,14 +89,14 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
 ***import destroyer and minesweeper***
 
 - OK - export onBtnDifficultyClick(event) => level, dimensions //overview of the grid, and return level and dimensions
-- OK - export onBtnStratClick({difficulty, dimentions})    //erase level and start buttons, return a new instance of minesweeper
-- PENDING - export onCellClick(event) => x, y    //on click on cell, get his coordonates
+- OK - export onBtnStartClick({difficulty, dimentions})    //erase level and start buttons, return a new instance of minesweeper
+- OK - export onCellClick(event) => x, y    //on click on cell, get his coordonates
 - export onBtnFlagClick()    //change flagMode variable, handle flag mode
-- OK - export onBtnLeaveClick(minesweeper)    //destroy minesweeper object, clear grid, display level buttons back
+- OK - export onBtnLeaveClick(minesweeper)    //destroy minesweeper object, end() => clear grid, display level buttons back
 
 ### destroyer
 
-- export default function(minesweeper)  //destroy the given object 
+- OK - export default function(minesweeper)  //destroy the given object 
   
 ## BONUS
 

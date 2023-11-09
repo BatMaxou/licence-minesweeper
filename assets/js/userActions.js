@@ -1,5 +1,6 @@
 import Minesweeper from './minesweeper.js'
 import destroyer from './destroyer.js'
+import { end, displayErrorMessage } from './frontActions.js'
 
 export function onBtnDifficultyClick(e) {
     let level = parseInt(e.target.value)
@@ -17,7 +18,7 @@ export function onBtnDifficultyClick(e) {
             gridCount = 20
             break
         default:
-            throw new Error('The difficulty level is incorrect.')
+            displayErrorMessage('The difficulty level is incorrect.')
     }
 
     for (let i = 0; i < gridCount; i++) {
@@ -37,18 +38,31 @@ export function onBtnDifficultyClick(e) {
 }
 
 export function onBtnStartClick({ difficulty, dimension }) {
-    if (difficulty !== 0 || dimension !== 0) {
-        document.querySelector(".level").style.display = "none"
-        return new Minesweeper(dimension, dimension, difficulty)
+    let errorMessage = document.querySelector('.errorMessage')
+
+    //display error message if no difficulty level
+    if (difficulty === 0 || dimension === 0 || document.querySelector(".grid").children.length === 0) {
+        if (!errorMessage) {
+            displayErrorMessage('You must choose a level.')
+        }
+        return
     }
+    document.querySelector(".errorMessage")?.remove()
+    document.querySelector(".level").style.display = "none"
+
+    // create leave btn
+    const leaveBtn = document.createElement("button")
+    leaveBtn.textContent = 'Leave';
+    leaveBtn.classList.add('leave');
+    document.querySelector(".container").insertBefore(leaveBtn, document.querySelector(".grid"))
+
+    return new Minesweeper(dimension, dimension, difficulty)
+
 }
 
 export function onBtnLeaveClick(minesweeper) {
-    minesweeper = null
-    const divGrid = document.querySelector(".grid")
-    document.querySelector(".level").style.display = "block"
-    divGrid.innerHTML = ""
-    return
+    end()
+    destroyer(minesweeper)
 }
 
 export function onCellClick(e) {
