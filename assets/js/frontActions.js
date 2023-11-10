@@ -1,6 +1,6 @@
 import destroyer from './destroyer.js'
 
-export function reveal(minesweeper, { x, y }, isNotBomb) {
+export const reveal = (minesweeper, { x, y }, isNotBomb) => {
     const cell = document.querySelector(`td[data-pos="${y} - ${x}"]`)
 
     if (!cell || cell.classList.contains('revealed')) {
@@ -32,33 +32,33 @@ export function reveal(minesweeper, { x, y }, isNotBomb) {
     destroyer(minesweeper)
 }
 
-function displayFail() {
+const displayFail = () => {
     const failMessage = document.createElement('p')
     failMessage.classList.add('endMessage', 'endMessage__fail')
     failMessage.textContent = '💀💀 OH NOOO, YOU EXPLOSED ! 💀💀'
     document.querySelector('.container').appendChild(failMessage)
 
     // Set a timeout to remove the element after 10 seconds
-    setTimeout(function () {
+    setTimeout(() => {
         document.querySelector('.container').removeChild(failMessage)
         end()
     }, 3000)
 }
 
-function displayWin() {
+const displayWin = () => {
     const winMessage = document.createElement('p')
     winMessage.classList.add('endMessage', 'endMessage__win')
     winMessage.textContent = '🏆🏆 CONGRATS, YOU WIN ! 🏆🏆'
     document.querySelector('.container').appendChild(winMessage)
 
     // Set a timeout to remove the element after 10 seconds
-    setTimeout(function () {
+    setTimeout(() => {
         document.querySelector('.container').removeChild(winMessage)
         end()
     }, 3000)
 }
 
-export function end() {
+export const end = () => {
     const divGrid = document.querySelector(".grid")
     document.querySelector(".level").style.display = "flex"
     document.querySelector(".leave")?.remove()
@@ -69,21 +69,21 @@ export function end() {
     divGrid.innerHTML = ""
 }
 
-export function displayBombNumber(number) {
+export const displayBombNumber = (number) => {
     const bombNumber = document.createElement('p')
     bombNumber.classList.add('bombNumber')
     bombNumber.textContent = 'Bomb number : ' + number
     document.querySelector(".container").insertBefore(bombNumber, document.querySelector(".grid"))
 }
 
-export function displayErrorMessage(message) {
+export const displayErrorMessage = (message) => {
     const errorMessage = document.createElement('p')
     errorMessage.classList.add('errorMessage')
     errorMessage.textContent = message
     document.querySelector(".container").insertBefore(errorMessage, document.querySelector(".grid"))
 }
 
-export function moveCounter() {
+export const moveCounter = () => {
     if (document.querySelector('.moveCounter')) {
         document.querySelector('.moveCounter').textContent = document.querySelector('.moveCounter').textContent.replace(/\d+/, match => parseInt(match) + 1);
         return

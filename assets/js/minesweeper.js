@@ -102,7 +102,6 @@ export default class Minesweeper {
     }
 
     isFinished() {
-        console.log(this.score, this.success)
         return this.score === this.success ? true : false
     }
 }

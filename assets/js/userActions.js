@@ -2,7 +2,7 @@ import Minesweeper from './minesweeper.js'
 import destroyer from './destroyer.js'
 import { end, displayErrorMessage } from './frontActions.js'
 
-export function onBtnDifficultyClick(e) {
+export const onBtnDifficultyClick = (e) => {
     let level = parseInt(e.target.value)
     let gridCount = 0
     const divGrid = document.querySelector(".grid")
@@ -37,18 +37,18 @@ export function onBtnDifficultyClick(e) {
     }
 }
 
-export function onBtnStartClick({ difficulty, dimension }) {
-    let errorMessage = document.querySelector('.errorMessage')
+export const onBtnStartClick = ({ difficulty, dimension }) => {
+    const errorMessage = document.querySelector('.errorMessage')
 
     //display error message if no difficulty level
-    if (difficulty === 0 || dimension === 0 || document.querySelector(".grid").children.length === 0) {
+    if (difficulty === 0 || dimension === 0 || document.querySelector(".grid")?.children.length === 0) {
         if (!errorMessage) {
             displayErrorMessage('You must choose a level.')
         }
         return
     }
     document.querySelector(".errorMessage")?.remove()
-    document.querySelector(".level").style.display = "none"
+    document.querySelector(".level")?.style.display = "none"
 
     // create leave btn
     const leaveBtn = document.createElement("button")
@@ -57,15 +57,14 @@ export function onBtnStartClick({ difficulty, dimension }) {
     document.querySelector(".container").insertBefore(leaveBtn, document.querySelector(".grid"))
 
     return new Minesweeper(dimension, dimension, difficulty)
-
 }
 
-export function onBtnLeaveClick(minesweeper) {
+export const onBtnLeaveClick = (minesweeper) => {
     end()
     destroyer(minesweeper)
 }
 
-export function onCellClick(e) {
+export const onCellClick = (e) => {
     const [y, x] = e.target.dataset.pos.replaceAll(" ", "").split("-")
 
     // au cas ou l'utilisateur change les coordonnées de la cellule
