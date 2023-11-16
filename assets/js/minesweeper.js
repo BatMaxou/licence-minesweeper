@@ -11,6 +11,7 @@ export default class Minesweeper {
         this.height = height;
         this.level = level;
         this.score = 0;
+        this.end = false;
         this.success = width * height - this.nbBombByDifficulty[level];
         this.grid = [];
         this.init();
@@ -79,8 +80,6 @@ export default class Minesweeper {
         }
         this.#placeBombs();
         this.#placeNumbers();
-
-        console.log(this.grid);
     }
 
     try({ x, y }) {
@@ -101,7 +100,19 @@ export default class Minesweeper {
         return neighbors
     }
 
+    incrementScore(point) {
+        this.score += point
+
+        if (this.score === this.success) {
+            this.end = true
+        }
+    }
+
+    forceEnding() {
+        this.end = true
+    }
+
     isFinished() {
-        return this.score === this.success ? true : false
+        return this.end
     }
 }
