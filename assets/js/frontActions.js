@@ -8,12 +8,6 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
     }
 
     if (isNotBomb) {
-        minesweeper.score += 1
-        if (minesweeper.isFinished()) {
-            displayEndMessage('🏆🏆 CONGRATS, YOU WIN ! 🏆🏆', 'endMessage', 'endMessage__win')
-            destroyer(minesweeper)
-            return
-        }
         const value = minesweeper.getValue(x, y)
         cell.classList.add('revealed')
         if (value === '0') {
@@ -24,6 +18,14 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
         } else {
             cell.innerHTML = value
         }
+
+        minesweeper.score += 1
+        console.log(minesweeper.score);
+        if (minesweeper.isFinished()) {
+            displayEndMessage('🏆🏆 CONGRATS, YOU WIN ! 🏆🏆', 'endMessage', 'endMessage__win')
+            destroyer(minesweeper)
+        }
+
         return
     }
     cell.innerHTML = '💣'
