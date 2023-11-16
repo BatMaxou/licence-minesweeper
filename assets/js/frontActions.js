@@ -10,7 +10,7 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
     if (isNotBomb) {
         minesweeper.score += 1
         if (minesweeper.isFinished()) {
-            displayWin()
+            displayEndMessage('🏆🏆 CONGRATS, YOU WIN ! 🏆🏆', 'endMessage', 'endMessage__win')
             destroyer(minesweeper)
             return
         }
@@ -28,35 +28,11 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
     }
     cell.innerHTML = '💣'
     cell.classList.add('bomb')
-    displayFail()
+    displayEndMessage('💀💀 OH NOOO, YOU EXPLOSED ! 💀💀', 'endMessage', 'endMessage__fail')
     destroyer(minesweeper)
 }
 
-const displayFail = () => {
-    const failMessage = document.createElement('p')
-    failMessage.classList.add('endMessage', 'endMessage__fail')
-    failMessage.textContent = '💀💀 OH NOOO, YOU EXPLOSED ! 💀💀'
-    document.querySelector('.container').appendChild(failMessage)
 
-    // Set a timeout to remove the element after 10 seconds
-    setTimeout(() => {
-        document.querySelector('.container').removeChild(failMessage)
-        end()
-    }, 3000)
-}
-
-const displayWin = () => {
-    const winMessage = document.createElement('p')
-    winMessage.classList.add('endMessage', 'endMessage__win')
-    winMessage.textContent = '🏆🏆 CONGRATS, YOU WIN ! 🏆🏆'
-    document.querySelector('.container').appendChild(winMessage)
-
-    // Set a timeout to remove the element after 10 seconds
-    setTimeout(() => {
-        document.querySelector('.container').removeChild(winMessage)
-        end()
-    }, 3000)
-}
 
 export const end = () => {
     const divGrid = document.querySelector(".grid")
@@ -69,27 +45,24 @@ export const end = () => {
     divGrid.innerHTML = ""
 }
 
-export const displayBombNumber = (number) => {
-    const bombNumber = document.createElement('p')
-    bombNumber.classList.add('bombNumber')
-    bombNumber.textContent = 'Bomb number : ' + number
-    document.querySelector(".container").insertBefore(bombNumber, document.querySelector(".grid"))
+export const displayInDOM = (id, node, content, ...classes) => {
+    document.getElementById(`${id}`) ? document.getElementById(`${id}`).remove() : false
+    let el = document.createElement(`${node}`)
+    classes.forEach((className) => el.classList.add(`${className}`));
+    el.id = id
+    el.textContent = content
+    document.getElementById("gameInfos").appendChild(el)
 }
 
-export const displayErrorMessage = (message) => {
-    const errorMessage = document.createElement('p')
-    errorMessage.classList.add('errorMessage')
-    errorMessage.textContent = message
-    document.querySelector(".container").insertBefore(errorMessage, document.querySelector(".grid"))
-}
+const displayEndMessage = (message, ...classes) => {
+    let elm = document.createElement('p')
+    classes.forEach((className) => elm.classList.add(`${className}`));
+    elm.innerHTML = `${message}`
+    document.querySelector('.container').appendChild(elm)
 
-export const moveCounter = () => {
-    if (document.querySelector('.moveCounter')) {
-        document.querySelector('.moveCounter').textContent = document.querySelector('.moveCounter').textContent.replace(/\d+/, match => parseInt(match) + 1);
-        return
-    }
-    const moveCounter = document.createElement('p')
-    moveCounter.classList.add('moveCounter')
-    moveCounter.textContent = 'Moves counter : 1'
-    document.querySelector(".container").insertBefore(moveCounter, document.querySelector(".grid"))
+    // Set a timeout to remove the element after 3 seconds
+    setTimeout(() => {
+        document.querySelector('.container').removeChild(elm)
+        end()
+    }, 3000)
 }

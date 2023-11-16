@@ -5,7 +5,7 @@
 
 ## Main
 
-***import all functions of userActions and frontActions***
+***import all functions of userActions and reveal() from frontActions***
 
 - init variables : infos[difficulty, dimension], minesweeper, flagMode
 - listener on difficultyBtn, BtnStart and cells
@@ -75,12 +75,9 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
 }
 
 ```
-  - OK - export displayBombNumber()
-  - OK - export displayErrorMessage()
-  - OK - export moveCounter() => add 1 to each click of the user and display it
+  - OK - export displayInDOM(id, node, message, classes) // display anything in DOM inside #gameInfos
+  - OK - displayEndMessage() // display last end message = win or fail
   - OK - export end()   //clear grid, display level buttons back
-  - PENDING - displayWin()    //success animation and end()
-  - PENDING - displayFail()   //loose animation and end()
   - export placeFlag(x,y)
   - export removeFlag(x,y)
   
@@ -90,10 +87,10 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
 
 - OK - export onBtnDifficultyClick(event) => level, dimensions //overview of the grid, and return level and dimensions
 - OK - export onBtnStartClick({difficulty, dimentions})    //erase level and start buttons, return a new instance of minesweeper
-- OK - export onCellClick(event) => x, y    //on click on cell, get his coordonates
+- OK - export onCellClick(event) => x, y    //on click on cell, get his coordonates + change moveCount
 - export onBtnFlagClick()    //change flagMode variable, handle flag mode
 - OK - export onBtnLeaveClick(minesweeper)    //destroy minesweeper object, end() => clear grid, display level buttons back
-
+- OK - moveCounter() => add 1 to each click of the user and display it
 ### destroyer
 
 - OK - export default function(minesweeper)  //destroy the given object 

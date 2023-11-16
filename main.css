@@ -99,6 +99,15 @@ button {
   background-color: #ff8296;
 }
 
+#gameInfos {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #777;
+  width: 50%;
+  place-content: space-evenly;
+}
+
 .grid {
   margin-top: 1rem;
 }
