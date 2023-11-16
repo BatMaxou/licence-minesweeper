@@ -1,0 +1,28 @@
+.leave {
+    padding: .5rem 1rem;
+    margin: 1rem;
+    transform-origin: left;
+    transition-duration: .5s;
+    border: none;
+
+    &:hover {
+        background: $darkRed;
+    }
+}
+
+.endMessage {
+    position: absolute;
+    top: 40%;
+    margin: 0 auto;
+    padding: 1rem;
+    font-size: 1.5rem;
+    z-index: 99;
+
+    &__fail {
+        background: $orange;
+    }
+
+    &__win {
+        background: $fluoYellow;
+    }
+}

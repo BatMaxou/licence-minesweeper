@@ -10,6 +10,19 @@
         width: 100%;
     }
 
+    &__btn-start {
+        padding: .4rem;
+        margin: 1rem;
+        transform-origin: left;
+        transition-duration: .5s;
+        border: none;
+
+        &:hover {
+            background: $green;
+        }
+    }
+
+
     &__btn-container {
         display: flex;
         gap: 1rem;

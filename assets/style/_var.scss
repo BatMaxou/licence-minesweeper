@@ -6,6 +6,7 @@ $lightGrey: #d1cfcf;
 $yellow: #ffffab;
 $darkYellow: darken($color: $yellow, $amount: 8);
 $yellowOutset: #ffffd4;
+$fluoYellow: #f2ff43;
 
 $green: #abffab;
 $darkGreen: darken($color: $green, $amount: 8);
@@ -16,5 +17,7 @@ $darkBlue: darken($color: $blue, $amount: 8);
 $blueOutset: #d4f9ff;
 
 $red: #ffabb8;
-$darkRed: darken($color: $red, $amount: 6);
+$darkRed: darken($color: $red, $amount: 8);
 $redOutset: #ffd4dd;
+
+$orange: #ff9a43;
