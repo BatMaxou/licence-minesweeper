@@ -17,6 +17,9 @@ document.querySelector(".level__btn-start").addEventListener('click', () => {
     if (minesweeper) {
         const cells = document.querySelectorAll('td')
         cells.forEach(cell => cell.addEventListener('click', (e) => {
+            if (cell.classList.contains('revealed') || minesweeper.isFinished()) {
+                return
+            }
             const coords = onCellClick(e)
             const isNotBomb = minesweeper.try(coords)
             reveal(minesweeper, coords, isNotBomb)

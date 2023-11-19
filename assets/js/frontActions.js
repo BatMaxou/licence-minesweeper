@@ -19,8 +19,7 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
             cell.innerHTML = value
         }
 
-        minesweeper.score += 1
-        console.log(minesweeper.score);
+        minesweeper.incrementScore(1)
         if (minesweeper.isFinished()) {
             displayEndMessage('🏆🏆 CONGRATS, YOU WIN ! 🏆🏆', 'endMessage', 'endMessage__win')
             destroyer(minesweeper)
@@ -31,6 +30,7 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
     cell.innerHTML = '💣'
     cell.classList.add('bomb')
     displayEndMessage('💀💀 OH NOOO, YOU EXPLOSED ! 💀💀', 'endMessage', 'endMessage__fail')
+    minesweeper.forceEnding()
     destroyer(minesweeper)
 }
 
