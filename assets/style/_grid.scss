@@ -27,6 +27,10 @@
             background-color: $red;
         }
     }
+
+    &.flag__mode, &.flag__mode td {
+        cursor: url('/images/flag.png'), auto;
+    }
 }
 
 @media (max-width:900px) {

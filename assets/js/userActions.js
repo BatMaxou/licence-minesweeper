@@ -55,6 +55,7 @@ export const onBtnStartClick = ({ difficulty, dimension }) => {
     displayInDOM('moveCounter', 'p', 'Moves counter : 0', 'moveCounter')
     const bombs = { 1: 10, 2: 30, 3: 75 };
     displayInDOM('bombNumber', 'p', `Bomb x ${bombs[difficulty]}`, 'bombNumber')
+    displayInDOM('flagBtn', 'button', '🚩', 'flag__btn')
     displayInDOM('leaveBtn', 'button', 'Leave', 'leave')
 
     return new Minesweeper(dimension, dimension, difficulty)
@@ -63,6 +64,12 @@ export const onBtnStartClick = ({ difficulty, dimension }) => {
 export const onBtnLeaveClick = (minesweeper) => {
     end()
     destroyer(minesweeper)
+}
+
+export const onBtnFlagClick = (target, minesweeper) => {
+    minesweeper.handleFlagMode()
+    target.classList.toggle('flag__btn--active')
+    document.querySelector('.grid').classList.toggle('flag__mode')
 }
 
 export const onCellClick = (e) => {
