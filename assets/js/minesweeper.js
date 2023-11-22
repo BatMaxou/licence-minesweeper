@@ -13,6 +13,7 @@ export default class Minesweeper {
         this.score = 0;
         this.end = false;
         this.success = width * height - this.nbBombByDifficulty[level];
+        this.flagMode = false;
         this.grid = [];
         this.init();
     }
@@ -106,6 +107,14 @@ export default class Minesweeper {
         if (this.score === this.success) {
             this.end = true
         }
+    }
+
+    handleFlagMode() {
+        this.flagMode = !this.flagMode
+    }
+
+    isFlagMode() {
+        return this.flagMode
     }
 
     forceEnding() {

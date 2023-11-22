@@ -9,6 +9,9 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
 
     if (isNotBomb) {
         const value = minesweeper.getValue(x, y)
+        if (cell.classList.contains('flagged')) {
+            cell.classList.remove('flagged')
+        }
         cell.classList.add('revealed')
         if (value === '0') {
             cell.innerHTML = ''
@@ -34,11 +37,15 @@ export const reveal = (minesweeper, { x, y }, isNotBomb) => {
     destroyer(minesweeper)
 }
 
-
+export const addFlag = (target) => {
+    target.classList.toggle('flagged')
+    target.innerHTML = target.innerHTML === '🚩' ? '' : '🚩'
+}
 
 export const end = () => {
     const divGrid = document.querySelector(".grid")
     document.querySelector(".level").style.display = "flex"
+    document.querySelector(".flag__btn")?.remove()
     document.querySelector(".leave")?.remove()
     document.querySelector(".fail")?.remove()
     document.querySelector(".win")?.remove()

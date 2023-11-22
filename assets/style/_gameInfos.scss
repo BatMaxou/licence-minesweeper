@@ -6,4 +6,15 @@
     width: 50%;
     place-content: space-evenly;
 
+    .flag__btn {
+        padding: .5rem 1rem;
+        margin: 1rem;
+        transform-origin: left;
+        transition-duration: .5s;
+        border: none;
+
+        &--active {
+            background: $darkYellow;
+        }
+    }
 }
