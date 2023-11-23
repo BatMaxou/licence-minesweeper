@@ -10,7 +10,6 @@
         text-align: center;
         cursor: pointer;
         background-color: $lightGrey;
-        // box-shadow: inset 5px 5px 10px $white, inset -3px -3px 5px $grey;
         transition-property: background-color, box-shadow;
         transition-duration: .5s;
         transition-timing-function: ease-out;
@@ -23,8 +22,21 @@
             background-color: $white;
         }
 
+        // use of important because this classes are not permanent
         &.bomb {
-            background-color: $red;
+            background-color: $red !important;
+        }
+
+        &.near {
+            background-color: $orange !important;
+        }
+
+        &.away {
+            background-color: $darkYellow !important;
+        }
+
+        &.annihilate, &.exploded {
+            background-color: $darkGrey;
         }
     }
 

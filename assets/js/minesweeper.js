@@ -34,7 +34,7 @@ export default class Minesweeper {
 
     #countBomb(x, y) {
         let count = 0
-        this.#explore({ x, y }, (coords) => this.#isBomb(coords, () => count++))
+        this.#explore({ x, y }, false, (coords) => this.#isBomb(coords, () => count++))
 
         return count.toString()
     }
@@ -43,20 +43,24 @@ export default class Minesweeper {
         this.grid = this.grid.map((row, y) => row.map((el, x) => 'B' === el ? el : this.#countBomb(x, y)))
     }
 
-    #explore({ x, y }, callback) {
+    #explore({ x, y }, strict, callback) {
         callback({ x: x - 1, y })
         callback({ x: x + 1, y })
 
         if (this.grid[y + 1]) {
             callback({ x, y: y + 1 })
-            callback({ x: x - 1, y: y + 1 })
-            callback({ x: x + 1, y: y + 1 })
+            if (!strict) {
+                callback({ x: x - 1, y: y + 1 })
+                callback({ x: x + 1, y: y + 1 })
+            }
         }
 
         if (this.grid[y - 1]) {
             callback({ x, y: y - 1 })
-            callback({ x: x - 1, y: y - 1 })
-            callback({ x: x + 1, y: y - 1 })
+            if (!strict) {
+                callback({ x: x + 1, y: y - 1 })
+                callback({ x: x - 1, y: y - 1 })
+            }
         }
     }
 
@@ -94,9 +98,9 @@ export default class Minesweeper {
         return this.grid[y][x]
     }
 
-    getNeighbors(x, y) {
+    getNeighbors({ x, y }, strict = false) {
         let neighbors = []
-        this.#explore({ x, y }, (neighborsCoords) => this.#exist(neighborsCoords, (neighborsCoords) => neighbors.push(neighborsCoords)))
+        this.#explore({ x, y }, strict, (neighborsCoords) => this.#exist(neighborsCoords, (neighborsCoords) => neighbors.push(neighborsCoords)))
 
         return neighbors
     }
