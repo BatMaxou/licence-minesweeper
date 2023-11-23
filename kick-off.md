@@ -45,7 +45,7 @@
     - OK - init()   //construct the grid, place Bombs and fill cell values.
     - OK - try(x,y) => return bool  //if cell x,y is bomb return false otherwise true
     - OK - getValue(x, y) => value  //get the value of x,y cell
-    - OK - getNeighbors(x,y) => coords  // return coordonnates of adjacents cells
+    - OK - getNeighbors({x,y}, strict) => coords  // return coordonnates of adjacents cells (strict don't take diagonals)
     - OK - isFinished() => {bool(success)}  //if score === scorefinal ? win true : false
 
 ## Modules
@@ -78,8 +78,8 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
   - OK - export displayInDOM(id, node, message, classes) // display anything in DOM inside #gameInfos
   - OK - displayEndMessage() // display last end message = win or fail
   - OK - export end()   //clear grid, display level buttons back
-  - export placeFlag(x,y)
-  - export removeFlag(x,y)
+  - OK - export placeFlag(x,y)
+  - OK - export removeFlag(x,y)
   
 ### userActions
 
@@ -88,7 +88,7 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
 - OK - export onBtnDifficultyClick(event) => level, dimensions //overview of the grid, and return level and dimensions
 - OK - export onBtnStartClick({difficulty, dimentions})    //erase level and start buttons, return a new instance of minesweeper
 - OK - export onCellClick(event) => x, y    //on click on cell, get his coordonates + change moveCount
-- export onBtnFlagClick()    //change flagMode variable, handle flag mode
+- OK - export onBtnFlagClick()    //change flagMode variable, handle flag mode
 - OK - export onBtnLeaveClick(minesweeper)    //destroy minesweeper object, end() => clear grid, display level buttons back
 - OK - moveCounter() => add 1 to each click of the user and display it
 ### destroyer
@@ -97,7 +97,10 @@ function reveal(minesweeper, { x, y }, isNotBomb) {
   
 ## BONUS
 
-utiliser local storage (garder partie en cour || stats)??
-ajouter chronomètre
-animation de fin
+use local storage
+add timer
+end animation => (
+  OK - lose animation
+  win animation
+)
     
